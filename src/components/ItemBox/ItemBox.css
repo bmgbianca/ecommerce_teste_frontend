@@ -192,16 +192,16 @@
   }
 
   .description {
-    font-size: 0.9rem;
-    margin-left: 1rem;
+    font-size: 0.7rem;
+    margin-left: 0.8rem;
   }
 
   .productInfo {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
   }
 
   .price {
-    font-size: 0.85rem;
-    line-height: 1rem;
+    font-size: 0.65rem;
+    line-height: 0.85rem;
   }
 }
