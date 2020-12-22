@@ -1,0 +1,52 @@
+.headerContainer {
+  max-width: 90vw;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5%;
+}
+
+.brand {
+  align-self: center;
+  width: 20%;
+}
+
+.searchIcon,
+.clearIcon {
+  cursor: pointer;
+}
+
+.searchField {
+  width: 40%;
+  margin: 0;
+}
+
+@media only screen and (max-width: 1024px) {
+  .brand {
+    width: 25%;
+  }
+
+  .searchField {
+    margin: 1%;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .searchField {
+    margin: 2.5% 2% 0.5% 0.5%;
+    width: 50%;
+  }
+
+  .brand {
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .searchField {
+    margin: 3.5% 8% 1% 1%;
+  }
+
+  .brand {
+    width: 33%;
+  }
+}

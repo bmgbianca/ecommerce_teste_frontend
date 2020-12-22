@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v18/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaorCIPrcVIT9d0c8.woff)
+    format('woff');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  width: 75%;
+  margin: 3% auto;
+  padding-bottom: 2%;
+  border-bottom: 2px solid #cfd8dc;
+}
+
+.preLoader {
+  align-self: center;
+  display: flex;
+}
+
+.charging,
+.notFound {
+  margin-left: 1rem;
+  font-family: Raleway, sans-serif;
+  font-size: 1.5rem;
+  align-self: center;
+}
+
+.productsFound {
+  width: 380px;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid #ffab00;
+  font-family: Raleway, sans-serif;
+  font-weight: 400;
+  font-size: 1.8rem;
+}
+
+.pageFooter {
+  display: flex;
+  justify-content: space-between;
+  width: 75%;
+  margin: 2% auto;
+}
+
+@media only screen and (max-width: 1600px) {
+  .mainContent {
+    width: 85%;
+  }
+}
+
+@media only screen and (max-width: 1300px) {
+  .mainContent,
+  .pageFooter {
+    width: 90%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .productsFound {
+    margin-top: 1rem;
+  }
+}
+
+@media only screen and (max-width: 830px) {
+  .mainContent {
+    margin: 4% auto;
+  }
+
+  .productsFound {
+    width: 330px;
+    font-size: 1.5rem;
+  }
+}
