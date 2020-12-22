@@ -61,7 +61,7 @@
 }
 
 .allImages {
-  width: 40%;
+  width: 35%;
 }
 
 .changePicture {
@@ -107,6 +107,13 @@
 
 .discountPrice {
   font-weight: 600;
+}
+
+@media only screen and (max-width: 1380px) {
+  .productMainImage,
+  .productImage {
+    width: 90px;
+  }
 }
 
 @media only screen and (max-width: 1200px) {
