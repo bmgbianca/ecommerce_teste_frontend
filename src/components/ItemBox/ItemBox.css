@@ -182,7 +182,7 @@
 
   .description {
     width: 65%;
-    margin-left: 1.5rem;
+    margin-left: 1.3rem;
   }
 }
 
@@ -193,6 +193,7 @@
 
   .description {
     font-size: 0.65rem;
+    margin-left: 0.3rem;
   }
 
   .productInfo {
