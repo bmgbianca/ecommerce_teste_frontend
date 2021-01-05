@@ -22,7 +22,9 @@
 
 .morePages {
   cursor: default;
+  color: blue;
 }
+
 
 @media only screen and (max-width: 768px) {
   .pageNumeration {
