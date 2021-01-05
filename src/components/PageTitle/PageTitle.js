@@ -1,7 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectSearchedString } from '../../features/searchedStringSlice';
 import './PageTitle.css';
 
-export default function PageTitle({ title }) {
+export default function PageTitle() {
+  const title = useSelector(selectSearchedString);
+
   return (
     <>
       {title ? (

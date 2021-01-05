@@ -1,18 +1,18 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { selectProductsArray } from '../../features/productsArraySlice';
+import { selectSearchedString } from '../../features/searchedStringSlice';
+import { selectTotalProducts } from '../../features/totalProductsSlice';
 import ItemBox from '../ItemBox/ItemBoxContainer';
 import ButtonItemsPerPage from '../ButtonItemsPerPage/ButtonItemsPerPage';
 import Pagination from '../Pagination/PaginationContainer';
 import './ProductsList.css';
 
-export default function ProductsList({
-  productsArray,
-  totalPages,
-  totalProducts,
-  pageNumber,
-  handlePageNumber,
-  handleProductsPerPage,
-  searchedString,
-}) {
+export default function ProductsList() {
+  const productsArray = useSelector(selectProductsArray);
+  const searchedString = useSelector(selectSearchedString);
+  const totalProducts = useSelector(selectTotalProducts);
+
   return (
     <>
       <main className="mainContent">
@@ -53,16 +53,8 @@ export default function ProductsList({
         )}
       </main>
       <footer className="pageFooter">
-        <ButtonItemsPerPage
-          productsArray={productsArray}
-          handleProductsPerPage={handleProductsPerPage}
-        />
-        <Pagination
-          totalPages={totalPages}
-          productsArray={productsArray}
-          pageNumber={pageNumber}
-          handlePageNumber={handlePageNumber}
-        />
+        <ButtonItemsPerPage />
+        <Pagination />
       </footer>{' '}
     </>
   );

@@ -1,4 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { changeProductsArray } from './features/productsArraySlice';
+import { selectProductsPerPage } from './features/productsPerPageSlice';
+import { changePageNumber, selectPageNumber } from './features/pageNumberSlice';
+import { selectSearchedString } from './features/searchedStringSlice';
+import { changeTotalPages } from './features/totalPagesSlice';
+import { changeTotalProducts } from './features/totalProductsSlice';
 import Header from './components/Header/HeaderContainer';
 import PageTitle from './components/PageTitle/PageTitle';
 import ProductsList from './components/ProductsList/ProductsList';
@@ -6,73 +13,63 @@ import { getProducts } from './services/requestsService';
 import './App.css';
 
 export default function App() {
-  const [productsArray, setProductsArray] = useState([]);
-  const [totalProducts, setTotalProducts] = useState(0);
-  const [totalPages, setTotalPages] = useState(0);
-  const [pageNumber, setPageNumber] = useState(0);
-  const [productsPerPage, setProductsPerPage] = useState(8);
-  const [searchedString, setSearchedString] = useState(null);
+  const dispatch = useDispatch();
+  const productsPerPage = useSelector(selectProductsPerPage);
+  const pageNumber = useSelector(selectPageNumber);
+  const searchedString = useSelector(selectSearchedString);
 
-  const getProductsArray = async (page) => {
+  const getProductsArray = async () => {
     try {
       if (searchedString === null) {
-        const fullProductsArray = await getProducts(productsPerPage, page);
-        setProductsArray(fullProductsArray.data.currentProductsList);
-        setTotalPages(fullProductsArray.data.totalPages);
+        const fullProductsArray = await getProducts(
+          productsPerPage,
+          pageNumber
+        );
+        dispatch(
+          changeProductsArray(fullProductsArray.data.currentProductsList)
+        );
+        dispatch(changeTotalProducts(fullProductsArray.data.totalProducts));
+        dispatch(changeTotalPages(fullProductsArray.data.totalPages));
       } else {
         const filteredProductsArray = await getProducts(
           productsPerPage,
-          page,
+          pageNumber,
           searchedString
         );
         if (filteredProductsArray.data.totalProducts === 0) {
-          setProductsArray(null);
+          dispatch(changeProductsArray(null));
         } else {
-          setProductsArray(filteredProductsArray.data.currentProductsList);
-          setTotalPages(filteredProductsArray.data.totalPages);
+          dispatch(
+            changeProductsArray(filteredProductsArray.data.currentProductsList)
+          );
+          dispatch(changeTotalPages(filteredProductsArray.data.totalPages));
         }
-        setTotalProducts(filteredProductsArray.data.totalProducts);
+        dispatch(changeTotalProducts(filteredProductsArray.data.totalProducts));
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const handlePageNumber = (page) => {
-    setPageNumber(page);
-    getProductsArray(page);
-  };
-
-  const handleProductsPerPage = (limit) => {
-    setProductsPerPage(limit);
-  };
-
-  const handleSearchedString = (searchInput) => {
-    setSearchedString(searchInput);
-  };
+  useEffect(() => {
+    getProductsArray();
+  }, [pageNumber]);
 
   useEffect(() => {
-    handlePageNumber(1);
     if (searchedString) {
       document.title = `Mmartan | Busca: ${searchedString}`;
     } else {
       document.title = 'Mmartan | Lista de Produtos';
     }
+    dispatch(changePageNumber(1));
+    getProductsArray();
   }, [searchedString, productsPerPage]);
 
   return (
     <>
-      <Header handleSearchedString={handleSearchedString} />
-      <PageTitle title={searchedString} />
-      <ProductsList
-        productsArray={productsArray}
-        totalPages={totalPages}
-        totalProducts={totalProducts}
-        pageNumber={pageNumber}
-        handlePageNumber={handlePageNumber}
-        handleProductsPerPage={handleProductsPerPage}
-        searchedString={searchedString}
-      />
+      <Header />
+      <PageTitle />
+      <ProductsList />
     </>
   );
 }

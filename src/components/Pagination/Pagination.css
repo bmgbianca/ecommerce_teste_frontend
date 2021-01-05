@@ -20,6 +20,10 @@
   font-weight: 400;
 }
 
+.morePages {
+  cursor: default;
+}
+
 @media only screen and (max-width: 768px) {
   .pageNumeration {
     margin-left: 10%;

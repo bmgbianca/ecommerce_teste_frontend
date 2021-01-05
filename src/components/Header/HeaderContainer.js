@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { changeSearchedString } from '../../features/searchedStringSlice';
 import HeaderPresentational from './HeaderPresentational';
 
-export default function HeaderContainer({ handleSearchedString }) {
+export default function HeaderContainer() {
   const [inputValue, setInputValue] = useState('');
+
+  const dispatch = useDispatch();
 
   const handleSearchInput = (event) => {
     setInputValue(event.target.value);
     if (event.key === 'Enter') {
-      handleSearchedString(event.target.value);
+      dispatch(changeSearchedString(event.target.value));
     } else if (event.key === 'Escape') {
       setInputValue('');
-      handleSearchedString(null);
+      dispatch(changeSearchedString(null));
     }
   };
 
   const handleSearchClick = () => {
-    handleSearchedString(inputValue);
+    dispatch(changeSearchedString(inputValue));
   };
 
   const handleClearClick = () => {
     setInputValue('');
-    handleSearchedString(null);
+    dispatch(changeSearchedString(null));
   };
   return (
     <HeaderPresentational

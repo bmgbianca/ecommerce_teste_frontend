@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectProductsArray } from '../../features/productsArraySlice';
+import {
+  changeProductsPerPage,
+  selectProductsPerPage,
+} from '../../features/productsPerPageSlice';
 import './ButtonItemsPerPage.css';
 
-export default function ButtonItemsPerPage({
-  productsArray,
-  handleProductsPerPage,
-}) {
-  const [chosenLimit, setChosenLimit] = useState(8);
+export default function ButtonItemsPerPage() {
+  const dispatch = useDispatch();
+  const productsPerPage = useSelector(selectProductsPerPage);
+  const productsArray = useSelector(selectProductsArray);
+
+  const [chosenLimit, setChosenLimit] = useState(productsPerPage);
 
   const handleLimitChange = (event) => {
     setChosenLimit(event.target.value);
-    handleProductsPerPage(event.target.value);
+    dispatch(changeProductsPerPage(event.target.value));
   };
 
   return (
@@ -17,18 +24,11 @@ export default function ButtonItemsPerPage({
       disabled={productsArray ? false : true}
       className="browser-default z-depth-4 blue-grey lighten-3 blue-grey-text text-darken-1 selectButton"
       value={chosenLimit}
-      style={{ border: 'none', width: 200 }}
       onChange={handleLimitChange}
     >
-      <option className="teste" value={8}>
-        8 produtos por página
-      </option>
-      <option className="teste" value={16}>
-        16 produtos por página
-      </option>
-      <option className="teste" value={32}>
-        32 produtos por página
-      </option>
+      <option value={5}>5 produtos por página</option>
+      <option value={15}>15 produtos por página</option>
+      <option value={30}>30 produtos por página</option>
     </select>
   );
 }
