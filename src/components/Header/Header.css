@@ -43,7 +43,7 @@
 
 @media only screen and (max-width: 480px) {
   .searchField {
-    margin: 3.5% 8% 1% 1%;
+    margin: 3.5% 2% 1% 1%;
   }
 
   i.material-icons.prefix.blue-grey-text.text-lighten-2.searchIcon, i.material-icons.prefix.blue-grey-text.text-lighten-2.clearIcon{
