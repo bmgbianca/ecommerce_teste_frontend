@@ -55,6 +55,10 @@
     margin-top: 0.5rem;
   }
 
+  .input-field .prefix ~ input{
+    margin-left: 2rem;
+  }
+
   .brand {
     width: 33%;
   }
